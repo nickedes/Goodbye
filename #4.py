@@ -1,5 +1,4 @@
 import sys
-from math import sqrt
 
 def findpal(n):
     pals,i = 0,999
