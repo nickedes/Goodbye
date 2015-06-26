@@ -1,22 +1,24 @@
-pal = []
-def checkPal(number):
-    num = number
-    rev = 0
-    while num > 0:
-        dig = num % 10
-        rev = rev*10 + dig
-        num /= 10
-    if rev == number:
-        return 1
-    return 0
+import sys
+from math import sqrt
 
-def findpal():
-    maxpal=0
-    for i in range(999,900,-1):
-        for j in range(999,900,-1):
+def findpal(n):
+    pals,i = 0,999
+    while i > 99:
+        j = 999
+        while j >= i:
             prod = i*j
-            if checkPal(prod):
-                if maxpal < prod:
-                    maxpal = prod
-    return maxpal
-print findpal()
+            j = j-1
+            if prod < pals:
+                break
+            if str(prod)==(str(prod)[::-1]) and prod < n:
+                if prod > pals:
+                    pals = prod
+            
+        i = i-1
+    return pals
+inputs = sys.stdin
+t = int(next(inputs))
+
+for i in range(t):
+    n = int(next(inputs))
+    print findpal(n)
