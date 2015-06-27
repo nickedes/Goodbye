@@ -1,4 +1,5 @@
 import sys
+import time
 from math import sqrt
 from itertools import count, islice
 
@@ -10,27 +11,35 @@ def isPrime(n):
             return False
     return True
 
-inputs = sys.stdin
-t = int(next(inputs))
+# inputs = sys.stdin
+# t = int(next(inputs))
+start_time = time.time()
+t = 1
 primes = [2]
 for i in range(t):
-    n = int(next(inputs))
-    prime,sum_p = 3,0
-    if n == 1:
-        print 0
-    elif n == 2:
-        print 2
-    elif n <= max(primes):
-        for x in primes:
-            if x <= n: sum_p += x
-        print sum_p
-    else:
-        if max(primes) > 2:
-            prime = max(primes)+2
-        while max(primes) < n:
-            if isPrime(prime):
-                primes.append(prime)
-            prime += 2
-        for x in primes:
-            if x <= n: sum_p += x
-        print sum_p
+    # n = int(next(inputs))
+    n = 1000
+    num = {}
+    for i in islice(count(2), n-1):
+        num[i] = 0
+    print time.time() - start_time
+    p = 2
+    while True:
+        flag = 0
+        for data in num:
+            if num[data] == 0 and data % p == 0 and data > p:
+                num[data] = 1
+        for key,value in num.items():
+            if key > p and value == 0:
+                flag = 1
+                p = key
+                break
+        if flag == 0:
+            break
+        print time.time() - start_time
+    sum_p = 0
+    for key,value in num.items():
+        if value == 0:
+            sum_p += key
+    print sum_p
+    print time.time() - start_time
