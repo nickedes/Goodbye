@@ -1,6 +1,5 @@
+# Todo: for better result, precompute sums!
 import sys
-from math import sqrt
-from itertools import count, islice
 
 def sumPrime(n):
     sieve = [True] * n
@@ -12,18 +11,23 @@ def sumPrime(n):
 inputs = sys.stdin
 t = int(next(inputs))
 primes = [2]
-prime_million = sumPrime(2000000+1)
+prime_million = sumPrime(6000000+1)
+sums = {1:0}
 for i in range(t):
     n = int(next(inputs))
     if n == 1:
-        print 1
-    elif n < 2000000:
-        sum_p = 0
-        for x in prime_million:
-            if x <= n:
-                sum_p += x
-            else:
-                break
-        print sum_p
+        print 0
+    elif n < 6000000:
+        if n in sums:
+            print sums[n]
+        else:
+            sum_p = 0
+            for x in prime_million:
+                if x <= n:
+                    sum_p += x
+                else:
+                    break
+            sums[n] = sum_p
+            print sum_p
     else:
         print sum(sumPrime(n+1))
