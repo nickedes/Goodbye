@@ -7,20 +7,9 @@ def collatz(n, count=1):
         count += 1
         if n % 2 == 0:
             n = n/2
-            if n > 1:
-                count += 1
-                if n % 2 == 0:
-                    n = n/2
-                else:
-                    n = 3*n + 1
         else:
-            n = 3*n + 1
-            if n > 1:
-                count += 1
-                if n % 2 == 0:
-                    n = n/2
-                else:
-                    n = 3*n + 1
+            count += 1
+            n = (3*n + 1)/2
     return count
  
 max = [0,0]
