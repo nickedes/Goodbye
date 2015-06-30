@@ -13,7 +13,7 @@ def collatz(n, count=1):
     return count
  
 max = [0,0]
-for i in islice(count(2),0,1000000-1):
+for i in islice(count(2),0,20):
     c = collatz(i)
     if c > max[0]:
         max[0] = c
