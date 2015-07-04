@@ -1,27 +1,24 @@
-import time
+import sys
 import string
-start = time.time()
-with open('names.txt','r') as f:
-	names = f.read()
-
-a = names.split('"')
-
-a.sort()
-
-while ',' in a:
-	a.remove(',')
-while '' in a:
-	a.remove('')
-
 alphas = {}
 for alpha in string.uppercase:
 	alphas[alpha] = ord(alpha) - 65 + 1
 
-score = 0
-for name in a:
-	ele_score = 0
-	for element in name:
-		ele_score += alphas[element]
-	score += ele_score*(a.index(name)+1)
+inputs = sys.stdin
+t = int(next(inputs))
+names = []
+for i in range(t):
+    n = next(inputs)[:-1]
+    names.append(n)
 
-print score,time.time() - start
+names.sort()
+q = int(next(inputs))
+for i in range(q):
+    if i == q-1:
+        word = next(inputs)
+    else:
+        word = next(inputs)[:-1]
+    ele_score = 0
+    for element in word:
+		ele_score += alphas[element] 
+    print ele_score*(names.index(word)+1)
