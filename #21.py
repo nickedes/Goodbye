@@ -1,4 +1,4 @@
-import time
+import sys
 from math import sqrt
 def sum_divisors(num):
     """
@@ -26,13 +26,14 @@ def sum_divisors(num):
         sum_factors *= (pow(prime, prime_fac[prime]+1)-1)/(prime -1)
     return sum_factors-n
 
-start = time.time()
-am = [0]
-n = 100000
-for i in xrange(2,n):
-    num = sum_divisors(i)
-    if i == sum_divisors(num) and num != i and i not in am:
-        am.append(i)
-        am.append(num)
-print sum(am)
-print time.time()-start
+inputs = sys.stdin
+t = int(next(inputs))
+for i in range(t):
+    n = int(next(inputs))
+    am = []
+    for i in xrange(2,n+1):
+        num = sum_divisors(i)
+        if i == sum_divisors(num) and num != i and i not in am and num <= n:
+            am.append(i)
+            am.append(num)
+    print sum(am)
