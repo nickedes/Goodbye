@@ -1,16 +1,35 @@
-from itertools import permutations
+import sys
+def Factor(num):
+    if num < 0:
+        return 0
+    fac = 1
+    for p in range(2,num+1):
+        fac *= p
+    return fac
 
-all = permutations('abcdefghijklm')
-dict_of_perm = {}
-index = 0
-done = []
-for permutation in all:
-	word = "".join(letter for letter in permutation)
-	done.append(index)
-	try:
-		dict_of_perm[index] = word
-		index += 1
-	except:
-		break
-print dict_of_perm[1]
-print max(done)
+perm =['a','b','c','d','e','f','g','h','i','j','k','l','m']
+N = len(perm)
+inputs = sys.stdin
+t = int(next(inputs))
+for x in xrange(t):
+    num = int(next(inputs))
+    permNum = []
+    remain = num - 1;
+
+    numbers = []
+    for i in range(N):
+        numbers.append(i)
+
+
+    for i in range(1,N):
+        j = remain / Factor(N - i)
+        remain = remain % Factor(N - i)
+        permNum.append(perm[numbers[j]])
+        numbers.pop(j)
+        if remain == 0:
+            break
+
+    for i in range(len(numbers)):
+        permNum.append(perm[numbers[i]])
+
+    print ''.join(permNum)
