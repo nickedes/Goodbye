@@ -1,10 +1,16 @@
 from itertools import permutations
 
-all = permutations(range(10))
-list_of_perm = []
+all = permutations('abcdefghijklm')
+dict_of_perm = {}
+index = 0
+done = []
 for permutation in all:
-	 number = int("".join(str(i) for i in permutation))
-	 list_of_perm.append(number)
-
-list_of_perm.sort()
-print list_of_perm[pow(10,6)-1]
+	word = "".join(letter for letter in permutation)
+	done.append(index)
+	try:
+		dict_of_perm[index] = word
+		index += 1
+	except:
+		break
+print dict_of_perm[1]
+print max(done)
