@@ -1,4 +1,4 @@
-from time import time
+import sys
 def count(S, m, n):
     """
         S -> A list of coins
@@ -9,9 +9,15 @@ def count(S, m, n):
     for coin in S:
         for i in range(coin, n+1):
             Matrix[i] += Matrix[i-coin]
-    return Matrix[n] 
-
-target = int(raw_input('Enter N: '))
-start = time()
+    return Matrix[n]
+inputs=sys.stdin
+t = int(next(inputs))
 coins = [1, 2, 5, 10, 20, 50, 100, 200]
-print count(coins,len(coins),target)%(10**9+7), time()-start
+results = {}
+for i in xrange(t):
+    target = int(next(inputs))
+    if target in results:
+        print results[target]
+    else:
+        results[target] = count(coins,len(coins),target)%(10**9+7)
+        print results[target]
