@@ -7,7 +7,7 @@ def count(S, m, n):
     """
     # If n is less than 0 then no solution exists
     Matrix = [[0 for x in range(m)] for x in range(n+1)] 
-
+    print Matrix[1][4]
     # If n is 0 then there is 1 solution (do not include any coin)
     for col in range(m):
         Matrix[0][col] = 1
@@ -18,9 +18,13 @@ def count(S, m, n):
 
     # count is sum of solutions (i) including S[m-1] (ii) excluding S[m-1]
     for row in range(1,n+1):
-        for col in range(1,m):
-            Matrix[row][col] = Matrix[row][col - 1] + Matrix[row - S[col]][col]
-
+        for col in range(m):
+            if col >= 1 and row - S[col] >= 0:
+                Matrix[row][col] = Matrix[row][col - 1] + Matrix[row - S[col]][col]
+            elif col >= 1:
+                Matrix[row][col] = Matrix[row][col - 1]
+            elif row - S[col] >= 0:
+                Matrix[row][col] = Matrix[row - S[col]][col]
     return Matrix[n][m-1]
 
 target = int(raw_input('Enter N: '))
