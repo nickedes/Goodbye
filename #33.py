@@ -9,37 +9,28 @@
 #     next
 # Multiply the four fractions
 # Report the denominator in lowest common terms to the website
-trivials = {}
-d=1
-for i in range(10,100):
-    for j in range(i,100):
+d = 1
+for i in range(10, 100):
+    for j in range(i, 100):
         if i % 10 == 0 or j % 10 == 0:
             continue
         if i == j:
             continue
         if str(i)[0] == str(j)[0]:
             if i/float(j) == int(str(i)[-1])/float(int(str(j)[-1])):
-                trivials[i] = j
                 d *= i/float(j)
-                
         elif str(i)[0] == str(j)[-1]:
             if i/float(j) == int(str(i)[-1])/float(int(str(j)[0])):
-                trivials[i] = j
                 d *= i/float(j)
-                
         elif str(i)[-1] == str(j)[0]:
             if i/float(j) == int(str(i)[0])/float(int(str(j)[-1])):
-                trivials[i] = j
                 d *= i/float(j)
-
         elif str(i)[-1] == str(j)[-1]:
             if i/float(j) == int(str(i)[0])/float(int(str(j)[0])):
-                trivials[i] = j
                 d *= i/float(j)
-
         else:
             continue
-print trivials,1/d
+print 1/d
 # d = 1
 # for i in range(1, 10):
 #     for j in range(1, i):
@@ -47,4 +38,3 @@ print trivials,1/d
 #         if not r and q <= 9:
 #             d *= i/float(j)
 # print d
-
