@@ -15,12 +15,15 @@ def isPrime(n):
             return False
     return True
 
-pandigital_primes = []
-for x in xrange(987654321, 912345678+1, -2):
-    if isPrime(x) and check_pandigital(x):
-        print x
-        pandigital_primes.append(x)
-        break
-    pass
 
-print pandigital_primes
+def PrimePandigital():
+    """The pandigital for n=9,8,6,5 is always a multiple of 3.
+    Returns
+    -------
+    Maximum pandigital prime.
+    """
+    for x in xrange(7654321, 7123456+1, -2):
+        if isPrime(x) and check_pandigital(x, 7):
+            return x
+
+print PrimePandigital()
