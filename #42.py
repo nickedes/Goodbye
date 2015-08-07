@@ -4,7 +4,7 @@ from math import sqrt
 def wordValue(word):
     """Calculate the word value.
 
-    Converting each letter in a word to a number corresponding to its 
+    Converting each letter in a word to a number corresponding to its
     alphabetical position and adding these values we form a word value.
     """
     val = 0
