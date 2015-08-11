@@ -28,7 +28,21 @@ def conjecture(num):
     ---------
     num : int
     """
-    pass
+    if isPrime(num):
+        return True
+    odds = getodd_prime(num)
+    n = num
+    while n > 3:
+        try:
+            prime = next(odds)
+            if (num - prime) % 2 == 0:
+                diff = (num - prime)/2
+                if sqrt(diff) == int(sqrt(diff)):
+                    return True
+            n -= 2
+        except:
+            break
+    return False
 
 if __name__ == '__main__':
     num = 33
