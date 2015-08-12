@@ -1,20 +1,5 @@
 # Find the first four consecutive integers to have four distinct prime factors.
 from math import sqrt
-from itertools import count, islice
-
-
-def isPrime(n):
-    """
-    Checks whether the passed number is prime or not.
-    """
-    if n == 2:
-        return True
-    if n < 2 or n % 2 == 0:
-        return False
-    for i in islice(count(3, 2), int(sqrt(n)-1)//2):
-        if n % i == 0:
-            return False
-    return True
 
 
 def getPrimefactors(num):
@@ -22,9 +7,13 @@ def getPrimefactors(num):
     Returns a set of prime factors of the `num`.
     """
     primes = set()
-    for i in xrange(2, num/2):
-        if isPrime(i) and num % i == 0:
+    while num % 2 == 0:
+        primes.add(2)
+        num /= 2
+    for i in xrange(3, int(sqrt(num)), 2):
+        while num % i == 0:
             primes.add(i)
+            num /= i
     return len(primes)
 
 
@@ -45,8 +34,6 @@ def distinctPrimes(num, count):
         start += 1
         if getPrimefactors(start) == num:
             count_cons += 1
-            if count_cons == 2:
-                print start
         else:
             count_cons = 0
     return start - count + 1
