@@ -1,4 +1,4 @@
-from itertools import permutations, count, islice
+from itertools import count, islice
 from math import sqrt
 
 
@@ -11,14 +11,10 @@ def isPrime(n):
     return True
 
 
-def getPerm(num):
-    """
-    """
-    return permutations(num)
-
-
 def getPrimes():
     """
+    Returns : list
+        A list of all 4-digit prime numbers.
     """
     list_primes = []
     for num in range(1000, 10000):
@@ -29,6 +25,9 @@ def getPrimes():
 
 def Prime_permutations():
     """
+    Returns : str
+        A string of 3 numbers which are prime as well as permutations of
+    each other.
     """
     all_primes = getPrimes()
     first, second, third = 0, 0, 0
