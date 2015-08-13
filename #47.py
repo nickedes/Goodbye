@@ -1,5 +1,5 @@
-# Find the first four consecutive integers to have four distinct prime factors.
-from math import sqrt
+# Find the first four consecutive integers to have four distinct prime factor4.
+from math import sqrt, ceil
 
 
 def getPrimefactors(num):
@@ -10,10 +10,12 @@ def getPrimefactors(num):
     while num % 2 == 0:
         primes.add(2)
         num /= 2
-    for i in xrange(3, int(sqrt(num)), 2):
+    for i in xrange(3, int(ceil(sqrt(num)+1)), 2):
         while num % i == 0:
             primes.add(i)
             num /= i
+    if num > 2:
+        primes.add(num)
     return len(primes)
 
 
