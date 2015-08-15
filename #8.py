@@ -2,8 +2,8 @@ import sys
 inputs = sys.stdin
 t = int(next(inputs))
 for i in range(t):
-    n,k = next(inputs)[:-1].split(' ')
-    n,k = int(n),int(k)
+    n, k = next(inputs)[:-1].split(' ')
+    n, k = int(n), int(k)
     num = next(inputs)[:-1]
     prod = []
     textnum = []
@@ -15,5 +15,5 @@ for i in range(t):
         for j in range(len(part)):
             tmp *= int(part[j])
         prod.append(tmp)
-        
+
     print max(prod)
