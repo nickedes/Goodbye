@@ -1,27 +1,14 @@
-from itertools import count, islice
 from math import sqrt
 
 
-def isPrime(n):
-    """
-    Checks whether n is prime or not.
-    """
-    if n < 2 or n % 2 == 0:
-        return False
-    for i in islice(count(3, 2), int(sqrt(n)-1)//2):
-        if n % i == 0:
-            return False
-    return True
-
-
-def getPrimes(num):
-    """
-    Generate a list of prime numbers upto num.
-    """
-    primes = [2]
-    for n in xrange(3, num, 2):
-        if isPrime(n):
-            primes.append(n)
+def sieve(limit):
+    """Computes the sieve of Eratosthenes for values up to limit included."""
+    primes = [True] * (limit + 1)
+    primes[0] = primes[1] = False
+    for i in range(2, int(sqrt(limit)) + 1):
+        if primes[i]:
+            for j in range(i * i, limit + 1, i):
+                primes[j] = False
     return primes
 
 
@@ -29,23 +16,18 @@ def sum_primes():
     """
     """
     limit = 1000000
-    gt = []
-    list_primes = getPrimes(limit)
-    print(sum(list_primes[:23]))
-    cons_prime = 2
-    num = 3
-    while True:
-        if cons_prime > limit:
-            break
-        if num in list_primes and num+cons_prime in list_primes:
-            gt.append(num+cons_prime)
-            cons_prime += num
-        elif isPrime(num):
-            cons_prime += num
-        num += 2
-        # if len(gt) > 10:
-        #     print gt[-1]
-    return (gt,num)
+    primes = sieve(limit)
+    list_primes = [i for i, p in enumerate(primes) if p]
+    max_len, max_sum = 0, 0
+    for i in range(len(list_primes)):
+        for j in range(i + max_len + 1, len(list_primes)):
+            s = sum(list_primes[i:j])  # could use sum array here
+            if s > limit:
+                break
+            elif primes[s]:
+                assert j - i > max_len
+                max_len, max_sum = j - i, s
+    return max_sum
 
 
 if __name__ == '__main__':
